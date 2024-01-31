@@ -1,1 +1,2 @@
- The first character is a blank
+5
+2 4 -10 4 -9
