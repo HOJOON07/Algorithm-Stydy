@@ -3,39 +3,41 @@ const input = Number(
   require("fs").readFileSync("./example.txt").toString().trim("")
 );
 
-// // 2. 입력이 여러 개일 때 (한 줄에 공백으로 구분)
-// const input = require("fs")
-//   .readFileSync("./example.txt")
-//   .toString()
-//   .trim()
-//   .split(" ");
+// 3과 5의 배수
 
-// 3. 입력값이 여러 줄일 때
-// const input = require("fs").readFileSync("./example.txt").toString().split("\n");
+// 15 = 3
 
-// 4. 입력값이 첫 번째 줄에는 입력 값의 길이(n),두 번째 줄에 공백으로 구분된 입력값이 주어질 대
-// const fs = require("fs");
-// const [n, input] = fs.readFileSync("./example.txt").toString().trim().split("\n");
-// const inputArr = input.trim().split(" ");ㄴ
+// 18 = 4
 
-// 5. 입력값이 첫 번째 줄에는 입력 값의 길이 (n), n개의 줄에 걸쳐서 한 줄에 하나의 입력값이 주어질 때
-// const fs = require("fs");
-// const [n, input] = fs.readFileSync("./example.txt").toString().trim().split("\n");
+// 9같은 경우에는 3으로만 나눠떨어짐 -> 3
 
-const numArr = [5, 3];
-console.log(input);
+// 23 = 5 // 3을 6번하고 5를 한 번 하면 7
 
-let kg = input;
-let count = 0;
+// 큰 수 5부터 나누는걸 찾고 3을 해줘야 최적의 해가 된다.
+// 아니면 5를 하고 3을 했을때 0이 되거나 5또는 3으로 나누거나
 
-for (let i = 0; i < numArr.length; i++) {
-  // 둘다 나머지가 0일때 몫이 더 작은거로 , 하나라도 나머지가 0 이되면 나머지가 0 이되는 애의 몫으로
-  if (kg % numArr[i] === 0 && kg % numArr[i + 1]) count = kg / numArr[1];
-  // 5부터 나누고 나머지를 3으로 나눈다. 그래서 나눠 떨어지면 몫의 카운트를 리턴
-  if (numArr[i] <= kg) {
-    kg -= numArr[i];
-    count++;
+// 1. 5로 나누고 나머지를 3으로 나눠서 0이되는 경우
+// 2. 5로 나눠 떨어지는 경우
+// 3. 3으로만 나눠 떨어지는 경우
+// 4. 셋다 안되면 -1 이다
+let flag = false;
+let number = input;
+let answer = 0;
+// 0까지 반복문을 돌것이다.
+while (number >= 0) {
+  // number가 5로 나누어 떨어지거나 0이되면 답을 5로 나눈 몫을 더해준다.
+  if (number % 5 === 0 || number === 0) {
+    answer += parseInt(number / 5);
+    console.log(answer);
+    flag = true;
+    break;
   }
-  if (numArr[i] > kg) return -1;
-  // 둘다안된다면 -1
+  // 에초에 number에서 3을 하나 씩 빼준다면 5의 몫만을 구해줄수 있을 것이다.
+  // 그리고 그럴때마다 answer에다가 1씩 카운트를 올려줌 결국은 3의 몫만큼 더해주는거랑 같다.
+  number -= 3;
+  answer += 1;
+}
+if (!flag) {
+  // 둘 다 안된다면 flag값을 설정해서 -1을 리턴하도록
+  console.log(-1);
 }
