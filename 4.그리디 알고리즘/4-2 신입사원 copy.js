@@ -29,8 +29,8 @@ let line = 1;
 for (let tc = 0; tc < testCase; tc++) {
   n = Number(input[line]); // 5
   let arr = [];
-  // i = 2부터 시작
-  // i<= 6
+  i = 2부터 시작
+  i<= 6
 
   for (let i = line + 1; i <= line + n; i++) {
     let data = input[i].split(" ").map(Number);
