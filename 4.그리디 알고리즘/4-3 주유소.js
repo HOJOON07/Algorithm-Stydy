@@ -1,48 +1,19 @@
 // 5. 입력값이 첫 번째 줄에는 입력 값의 길이 (n), n개의 줄에 걸쳐서 한 줄에 하나의 입력값이 주어질 때
-const fs = require("fs");
-const [n, ...input] = fs
-  .readFileSync("./example.txt")
-  .toString()
-  .trim()
-  .split("\n");
-
-const cityNum = Number(n);
-const citylength = input[0].split(" ").map(Number).splice(0, 3);
-const price = input[1].split(" ").map(Number);
-
-// console.log(length);
-console.log(price);
-console.log(cityNum);
-let answer = 0;
-let sum = 0;
-for (let i = 0; i < citylength.length; i++) {
-  if (i === 0) {
-    sum += citylength[0] * price[0];
-  } else {
-    if (price[i] > price[i - 1]) {
-      sum += citylength[i] * price[i - 1];
-    } else {
-      sum += citylength[i] * price[i];
-    }
-  }
-  answer = sum;
+let fs = require("fs");
+let input = fs.readFileSync("./example.txt").toString().split("\n");
+let n = Number(input[0]);
+let dist = input[1].split(" ").map(Number);
+let cost = input[2].split(" ").map(Number);
+// 주유 비용(cost) 배열의 값을 비오름차순이 되도록 변환 // [5, 2, 4, 1] -> [5, 2, 2, 1]
+let minCost = cost[0];
+for (let i = 0; i < n; i++) {
+  minCost = Math.min(minCost, cost[i]);
+  cost[i] = minCost;
 }
-console.log(answer);
-// 4
-// 2 3 1 // 길이
-// 5 2 4 1 // 가격
-
-// 1. 10
-// 2. 6
-// 3. 2
-
-// a b c d
-//  2 3 1
-
-// 5 2 4 1 가격
-
-// 5 2 4
-
-// 1. 처음에는 무조건 다음 도시까지 이동해야 된다. 5 * 2
-// 2. 그다음에는 5와 2 중에 선택 2 가 더 작기 때문에 2를 선택함 다음 거리까지 즉 3,
-// 3. 다음 거리까지 선택을 하면 2와 4중에 선택을 해야되는데 2가 더 작기 때문에 거리만큼 1을 더 넣는게 효율적이다.
+// 도로당 이동 비용의 합 계산
+let answer = BigInt(0);
+for (let i = 0; i < n - 1; i++) {
+  // JavaScript에서 큰 정수를 처리할 때는 BigInt 사용
+  answer += BigInt(dist[i]) * BigInt(cost[i]);
+}
+console.log(String(answer)); // 뒤에 붙는 'n' 제거

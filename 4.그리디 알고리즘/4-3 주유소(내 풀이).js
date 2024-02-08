@@ -7,12 +7,15 @@ const [n, ...input] = fs
   .split("\n");
 
 const cityNum = Number(n);
-const citylength = input[0].split(" ").map(Number).splice(0, 3);
+const citylength = input[0]
+  .split(" ")
+  .map(Number)
+  .splice(0, cityNum - 1);
 const price = input[1].split(" ").map(Number);
 
 // console.log(length);
-console.log(price);
-console.log(cityNum);
+// console.log(price);
+// console.log(cityNum);
 let answer = 0;
 let sum = 0;
 for (let i = 0; i < citylength.length; i++) {

@@ -29,6 +29,8 @@ console.log(input);
 const testCase = Number(n);
 let lineNumber = input[0];
 
+// 반복 횟수는 두번만 해줄 꺼임
+
 // a 정렬과
 // b 정렬
 // 2
