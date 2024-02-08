@@ -26,10 +26,8 @@ const [n, ...input] = fs
   .map((el) => el.split(" ").map(Number));
 
 console.log(input);
-
-inp;
-
-const arr = Array(n).fill().slice();
+const testCase = Number(n);
+let lineNumber = input[0];
 
 // a 정렬과
 // b 정렬
