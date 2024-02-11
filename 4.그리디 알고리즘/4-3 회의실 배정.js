@@ -20,3 +20,4 @@ for (let i = 1; i < n; i++) {
   }
 }
 console.log(cnt);
+console.log("커밋 죄송합니다..");
